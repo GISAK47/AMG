@@ -1,0 +1,42 @@
+# AMG
+AMGNV
+ethernet_devices = [1, [7], [2], [8374163], [84302738]]
+usb_devices = [1, [7], [1], [2314567], [0]]
+
+# The long way
+all_devices = [
+  ethernet_devices[0] + usb_devices[0], 
+  ethernet_devices[1] + usb_devices[1], 
+  ethernet_devices[2] + usb_devices[2], 
+  ethernet_devices[3] + usb_devices[3], 
+  ethernet_devices[4] + usb_devices[4]
+]
+
+# Some comprehension magic
+all_devices = [x + y for x, y in zip(ethernet_devices, usb_devices)]
+
+# Let's use maps
+import operator 
+all_devices = list(map(operator.add, ethernet_devices, usb_devices))
+
+# We can't forget our favorite computation library
+import numpy as np 
+all_devices = np.add(ethernet_devices, usb_devices)
+# Use to invert dictionaries that have unique values
+my_inverted_dict = dict(map(reversed, my_dict.items()))
+
+# Use to invert dictionaries that have unique values
+my_inverted_dict = {value: key for key, value in my_dict.items()}
+
+# Use to invert dictionaries that have non-unique values
+from collections import defaultdict
+my_inverted_dict = defaultdict(list)
+{my_inverted_dict[v].append(k) for k, v in my_dict.items()}
+
+# Use to invert dictionaries that have non-unique values
+my_inverted_dict = dict()
+for key, value in my_dict.items(): 
+  my_inverted_dict.setdefault(value, list()).append(key)
+
+# Use to invert dictionaries that have lists of values
+my_dict = {value: key for key in my_inverted_dict for value in my_map[key]}
